@@ -12,6 +12,7 @@ class Card extends Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      // hasTrunfo,
     } = this.props;
 
     return (
@@ -24,6 +25,7 @@ class Card extends Component {
         <p data-testid="attr3-card">{ cardAttr3 }</p>
         <p data-testid="rare-card">{ cardRare }</p>
         { cardTrunfo === true && <h2 data-testid="trunfo-card">Super Trunfo</h2> }
+        {/* { hasTrunfo === false && <h2 data-testid="trunfo-input">Você já tem um Super Trunfo em seu baralho</h2> } */}
       </div>
     );
   }

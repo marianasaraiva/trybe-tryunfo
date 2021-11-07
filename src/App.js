@@ -9,20 +9,22 @@ class App extends React.Component {
 
     this.onInputChange = this.onInputChange.bind(this);
     this.validacao = this.validacao.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
 
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
-      // // hasTrunfo= false,
+      // hasTrunfo: false,
       isSaveButtonDisabled: true,
       // onInputChange=() => 'a',
       // onSaveButtonClick={() => 'a'},
+      cardsSave: [],
     };
   }
 
@@ -35,6 +37,41 @@ class App extends React.Component {
     this.setState({
       [name]: value,
     }, this.validacao);
+  }
+
+  onSaveButtonClick() {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+    } = this.state;
+    const object = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+    };
+    this.setState((stateActual) => {
+      const { cardsSave } = stateActual;
+      const salveClear = {
+        cardName: '',
+        cardDescription: '',
+        cardAttr1: '0',
+        cardAttr2: '0',
+        cardAttr3: '0',
+        cardImage: '',
+        cardRare: 'normal',
+        cardsSave: [...cardsSave, object],
+      };
+      return salveClear;
+    });
   }
 
   validacao() {
@@ -56,8 +93,12 @@ class App extends React.Component {
       && cardDescription.length
       && cardImage.length
       && cardRare.length !== 0)
-      && cardAttr1 >= valueMin && cardAttr2 >= valueMin && cardAttr3 >= valueMin
-      && cardAttr1 <= valueMax && cardAttr2 <= valueMax && cardAttr3 <= valueMax
+      && Number(cardAttr1) >= valueMin
+      && Number(cardAttr2) >= valueMin
+      && Number(cardAttr3) >= valueMin
+      && Number(cardAttr1) <= valueMax
+      && Number(cardAttr2) <= valueMax
+      && Number(cardAttr3) <= valueMax
       && (sum <= sumTotal)) {
       this.setState({
         isSaveButtonDisabled: false,
@@ -68,24 +109,6 @@ class App extends React.Component {
       });
     }
   }
-
-  // onSaveButtonClick() {
-  //   const {
-  //     cardName,
-  //     cardDescription,
-  //     cardAttr1,
-  //     cardAttr2,
-  //     cardAttr3,
-  //     cardImage,
-  //     cardRare,
-  //     cardTrunfo,
-  //   } = this.state;
-
-  //   this.setState({
-  //     isSaveButtonDisabled:
-  //     cardName: teste,
-  //   });
-  // }
 
   render() {
     const {
