@@ -33,9 +33,8 @@ class Form extends Component {
 
         <label htmlFor="cardDescription">
           Descrição da carta
-          <input
+          <textarea
             data-testid="description-input"
-            type="textarea"
             name="cardDescription"
             value={ cardDescription }
             onChange={ onInputChange }
@@ -112,7 +111,7 @@ class Form extends Component {
         </label>
 
         <button
-          type="submit"
+          type="button"
           data-testid="save-button"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }
