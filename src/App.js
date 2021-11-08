@@ -18,9 +18,9 @@ class App extends React.Component {
       cardAttr2: 0,
       cardAttr3: 0,
       cardImage: '',
-      cardRare: '',
+      cardRare: 'normal',
       cardTrunfo: false,
-      // hasTrunfo: false,
+      hasTrunfo: false,
       isSaveButtonDisabled: true,
       // onInputChange=() => 'a',
       // onSaveButtonClick={() => 'a'},
@@ -29,7 +29,6 @@ class App extends React.Component {
   }
 
   onInputChange(event) {
-    event.preventDefault();
     const { name } = event.target;
     const value = event.target.type === 'checkbox'
       ? event.target.checked : event.target.value;
@@ -38,6 +37,8 @@ class App extends React.Component {
       [name]: value,
     }, this.validacao);
   }
+
+  // Auxilio Anaua
 
   onSaveButtonClick() {
     const {
@@ -48,7 +49,15 @@ class App extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
+      cardTrunfo,
     } = this.state;
+
+    if (cardTrunfo) {
+      this.setState({
+        hasTrunfo: true,
+      });
+    }
+
     const object = {
       cardName,
       cardDescription,
@@ -70,9 +79,12 @@ class App extends React.Component {
         cardRare: 'normal',
         cardsSave: [...cardsSave, object],
       };
+      console.log(cardsSave);
       return salveClear;
     });
   }
+
+  // auxilio Gabriel Fontes
 
   validacao() {
     const valueMax = 90;
@@ -120,6 +132,7 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
     } = this.state;
     return (
@@ -134,7 +147,7 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
-          // hasTrunfo= { false },
+          hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
