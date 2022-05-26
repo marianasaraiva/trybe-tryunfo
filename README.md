@@ -1,4 +1,4 @@
-# :dart: Projeto Trybers and Dragons
+# :dart: Projeto Tryunfo
 Projeto desenvolvido no módulo 11, durante o módulo de front-end no curso de desenvolvimento web da Trybe.
 
 
